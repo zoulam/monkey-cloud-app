@@ -1,0 +1,48 @@
+const qiniu = require('qiniu')
+const QiniuManager = require('./src/utils/QiniuManager')
+const path = require('path')
+
+const accessKey = 'Bcuwv-vAh9xS3k-2s9DsB0APrSWRdTj954TjHGRz'
+const secretKey = 'KTlUYpx71VXuwBBwoWIw6G8PCfcnVK87dT9MCVaD'
+var localFile = "C:/Users/zoulam/Desktop/testupload.md"
+const key = 'testupload.md'
+const manger = new QiniuManager(accessKey, secretKey, 'zoulam-cloud-doc')
+
+// ~upload test
+// manger.uploadFile(key, localFile).then(value => {
+//   console.log('upload success', value);
+// })
+
+// ~delete test
+// manger.deleteFile(key).then(() => {
+//   console.log('delete success');
+// })
+
+// ~上传下载链式
+// manger.uploadFile(key, localFile).then(value => {
+//   console.log('upload success', value);
+//   return manger.deleteFile(key);
+// }).then(() => {
+//   console.log('delete success');
+// });
+
+// ~桶域名获取
+// manger.getBucketDomain().then(data => {
+//   console.log(data);
+// })
+
+// ~获取下载链接
+manger.generateDownloadLink(key).then(data => {
+  console.log(data);
+  return manger.generateDownloadLink('testupload.md')
+}).then(data => {
+  console.log(data);
+})
+
+
+// var publicBucketDomain = 'http://qhv8ne4t9.hd-bkt.clouddn.com'
+
+
+
+
+
